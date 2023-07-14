@@ -3,6 +3,9 @@
 #include <locale.h>
 #include <windows.h>
 
+#define tamanhoString 20
+#define countItens 3
+
 int  menu = 1;
 int *pMenu = &menu;
 
@@ -26,7 +29,6 @@ int main()
         switch (*pMenu)
         {
             case 0:
-                system("pause");
                 exit(1);
                 break;
             case 1:
@@ -44,30 +46,50 @@ int main()
             default:
                 break;
         }       
-    }
-    
+    }    
 }
 
 void listToner()
 {   
     setlocale(LC_ALL, "");
 
-    char marcaNome[5][20] = {"TonerHP.txt", "TonerBrother.txt", "TonerSamsung.txt"};
+    char *resultados;
+    char leituraItens[tamanhoString];
+    char marcaNome[countItens][tamanhoString] = {"TonerHP.txt", "TonerBrother.txt", "TonerSamsung.txt"};
 
-    FILE *arquivoLeitura;
+    FILE *arquivoLeitura, *arquivoEscrita;    
     arquivoLeitura = fopen (marcaNome[*pMenu-1], "r");
 
     if(arquivoLeitura == NULL)
     {
         printf("O arquivo não existe e está sendo criado...\n");
         printf("Arquivo criado com sucesso!\n");
-        arquivoLeitura = fopen(marcaNome[*pMenu-1], "w");
+        printf("Você será redirecionado para o Menu Principal\n");
+        arquivoEscrita = fopen(marcaNome[*pMenu-1], "w");
+
         Sleep(1500);
         system("cls");
-     }else
+        main();
+     }
+     
+     else
      {
-        printf("teste");
-        *pMenu = 1;
+        system("cls");
+        printf("------------------------------------\n");
+        printf("-------------[Toner HP]-------------\n");
+        printf("------------------------------------\n");
+        
+        while(!feof(arquivoLeitura))
+        {
+            resultados = fgets(leituraItens, tamanhoString, arquivoLeitura);
+            if(resultados)
+            {   
+                printf("%s", leituraItens);
+            }
+        }
+        
+        fclose(arquivoLeitura);
+        system("pause");
         main();
      }
 }
