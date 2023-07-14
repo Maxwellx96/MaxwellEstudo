@@ -3,7 +3,7 @@
 #include <locale.h>
 #include <windows.h>
 
-int op, menu = 1;
+int  menu = 1;
 int *pMenu = &menu;
 
 void listToner();
@@ -30,17 +30,17 @@ int main()
                 exit(1);
                 break;
             case 1:
-                *pMenu = 1;
                 listToner(*pMenu);
+                *pMenu = 0;
                 break;
             case 2:
-                *pMenu = 2;
                 listToner(*pMenu);
+                *pMenu = 0;
                 break;
             case 3:
-                *pMenu = 3;
                 listToner(*pMenu);
-                break;            
+                *pMenu = 0;
+                break;          
             default:
                 break;
         }       
@@ -52,35 +52,22 @@ void listToner()
 {   
     setlocale(LC_ALL, "");
 
-    FILE *arquivoLeitura;
+    char marcaNome[5][20] = {"TonerHP.txt", "TonerBrother.txt", "TonerSamsung.txt"};
 
-    switch (*pMenu)
-    {
-        case 1:
-            arquivoLeitura = fopen("TonerHP.txt", "r");
-            break;
-        case 2:
-            arquivoLeitura = fopen("TonerBrother.txt", "r");
-            break;
-        case 3:
-            arquivoLeitura = fopen("TonerSamsung.txt", "r");
-            break;
-        
-        default:
-            break;
-    }    
+    FILE *arquivoLeitura;
+    arquivoLeitura = fopen (marcaNome[*pMenu-1], "r");
 
     if(arquivoLeitura == NULL)
     {
-        printf("O arquivo não existe e está sendo criado");
-        if(*pMenu == 1){arquivoLeitura = fopen("TonerHP.txt", "w");}
-        if(*pMenu == 2){arquivoLeitura = fopen("TonerBrother.txt", "w");}
-        if(*pMenu == 3){arquivoLeitura = fopen("TonerSamsung.txt", "w");}                
-        printf("\nArquivo criado com sucesso!\n");
-    }else
-    {
-        
-    }
-
-
+        printf("O arquivo não existe e está sendo criado...\n");
+        printf("Arquivo criado com sucesso!\n");
+        arquivoLeitura = fopen(marcaNome[*pMenu-1], "w");
+        Sleep(1500);
+        system("cls");
+     }else
+     {
+        printf("teste");
+        *pMenu = 1;
+        main();
+     }
 }
