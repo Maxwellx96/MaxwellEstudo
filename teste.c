@@ -5,6 +5,7 @@
 
 #define tamanhoString 20
 #define countItens 3
+#define tempExecucao 1500
 
 int  menu = 1;
 int *pMenu = &menu;
@@ -17,6 +18,7 @@ FILE *arquivoLeitura, *arquivoEscrita;
 
 void listToner();
 void regToner();
+void options();
 
 int main()
 {
@@ -37,23 +39,57 @@ int main()
         {
             case 0:
                 exit(1);
-                break;
-            case 1:
-                listToner();
-                *pMenu = 0;
-                break;
-            case 2:
-                regToner();
-                *pMenu = 0;
-                break;
-            case 3:
-                listToner();
-                *pMenu = 0;
-                break;          
+                break;                         
             default:
+                options(*pMenu);
+                *pMenu = 0;
                 break;
         }       
     }    
+}
+
+void options(int option)
+{
+        int escolhaProduto;
+
+        if(option > countItens)
+        {
+            printf("Essa opção não está disponível. Você será redirecionado para o Menu Princiapl\n");
+            *pMenu = 1;
+            Sleep(tempExecucao);
+            system("cls");
+            main();
+        }
+
+        printf("[1] Cadastrar Produto\n");
+        printf("[2] Listar Produtos\n");
+        printf("[0] Voltar\n");
+        scanf("%d", &escolhaProduto);
+
+        if(escolhaProduto > 2)
+        {
+            printf("Essa opção não está disponível. Você será redirecionado para o Menu Princiapl\n");
+            *pMenu = 1;
+            Sleep(tempExecucao);
+            system("cls");
+            main();
+        }
+
+        switch (escolhaProduto)
+        {
+            case 0:
+                main();
+                break;
+            case 1:
+                regToner();
+                break;
+            case 2:
+                listToner();
+                break;
+            default:
+                break;
+        }
+        
 }
 
 //Função para cadastrar produto
@@ -62,7 +98,7 @@ void regToner()
     //Define o idioma padrão do sistema.
     setlocale(LC_ALL, "");
     
-    int continueCad;
+    int continueCad, i;
     char produtoEspec[2][20];
     
     // Abrir o arquivo da respectiva marca escolhida para escrita.
@@ -81,7 +117,7 @@ void regToner()
     {
         system("cls");
         printf("-----------------------------------------\n");
-        printf("Cadastrar Toner\n");
+        printf("Cadastrar Toner - %s\n", exibirMarca[*pMenu-1]);
         printf("-----------------------------------------\n");
 
         printf("Digite o nome do produto: ");
@@ -92,9 +128,15 @@ void regToner()
         fflush(stdin);
         scanf("%[^\n]", &produtoEspec[1]);
 
+        for(i = 0; i < 4; i++)
+        {
+            printf("%s", produtoEspec[1][i]);
+        }
+
         //Concatena o nome do produto e valor já incluindo o R$ e quebra de linha ao final.
         strcat(produtoEspec[0], " - R$");
         strcat(produtoEspec[0], produtoEspec[1]);
+        strcat(produtoEspec[0], ",00");
         strcat(produtoEspec[0], "\n");
 
         //Insere os valores no arquivo TXT da marca escolhida e fecha o arquivo.
