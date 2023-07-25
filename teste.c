@@ -35,6 +35,7 @@ int main()
         printf("O que deseja fazer? ");
         scanf("%d", &*pMenu);
 
+        if(*pMenu )
         switch (*pMenu)
         {
             case 0:
@@ -54,13 +55,17 @@ void options(int option)
 
         if(option > countItens)
         {
-            printf("Essa op√ß√£o n√£o est√° dispon√≠vel. Voc√™ ser√° redirecionado para o Menu Princiapl\n");
+            printf("Essa opÁ„o n„o est· disponÌvel. VocÍ ser· redirecionado para o Menu Princiapl\n");
             *pMenu = 1;
             Sleep(tempExecucao);
             system("cls");
             main();
         }
 
+        system("cls");
+        printf("-----------------------------------------\n");
+        printf("%s\n", exibirMarca[*pMenu-1]);
+        printf("-----------------------------------------\n");
         printf("[1] Cadastrar Produto\n");
         printf("[2] Listar Produtos\n");
         printf("[0] Voltar\n");
@@ -68,13 +73,13 @@ void options(int option)
 
         if(escolhaProduto > 2)
         {
-            printf("Essa op√ß√£o n√£o est√° dispon√≠vel. Voc√™ ser√° redirecionado para o Menu Princiapl\n");
+            printf("Essa opÁ„o n„o est· disponÌvel. VocÍ ser· redirecionado para o Menu Princiapl\n");
             *pMenu = 1;
             Sleep(tempExecucao);
             system("cls");
             main();
         }
-
+        
         switch (escolhaProduto)
         {
             case 0:
@@ -88,14 +93,13 @@ void options(int option)
                 break;
             default:
                 break;
-        }
-        
+        }        
 }
 
-//Fun√ß√£o para cadastrar produto
+//FunÁ„o para cadastrar produto
 void regToner()
 {   
-    //Define o idioma padr√£o do sistema.
+    //Define o idioma padr„o do sistema.
     setlocale(LC_ALL, "");
     
     int continueCad, i;
@@ -104,7 +108,7 @@ void regToner()
     // Abrir o arquivo da respectiva marca escolhida para escrita.
     arquivoEscrita = fopen(marcaNome[*pMenu-1], "a");
 
-     //Se o arquivo n√£o existir, ele ser√° criado.
+     //Se o arquivo n„o existir, ele ser· criado.
     if(arquivoEscrita == NULL)
     {
         arquivoEscrita = fopen(marcaNome[*pMenu-1], "w");
@@ -112,7 +116,7 @@ void regToner()
         main();        
     }
 
-     //Caso o arquivo j√° exista, op√ß√µes para cadastro ser√£o exibidas na tela.
+     //Caso o arquivo j· exista, opÁıes para cadastro ser„o exibidas na tela.
     else
     {
         system("cls");
@@ -128,12 +132,14 @@ void regToner()
         fflush(stdin);
         scanf("%[^\n]", &produtoEspec[1]);
 
-        for(i = 0; i < 4; i++)
+        if(strlen(produtoEspec[0]) > 20)
         {
-            printf("%s", produtoEspec[1][i]);
+            printf("Nome do produto ultrapassou o limite permitido.\n");
+            system("pause");
+            regToner();
         }
 
-        //Concatena o nome do produto e valor j√° incluindo o R$ e quebra de linha ao final.
+        //Concatena o nome do produto e valor j· incluindo o R$ e quebra de linha ao final.
         strcat(produtoEspec[0], " - R$");
         strcat(produtoEspec[0], produtoEspec[1]);
         strcat(produtoEspec[0], ",00");
@@ -143,23 +149,23 @@ void regToner()
         fputs(produtoEspec[0], arquivoEscrita);
         fclose(arquivoEscrita);
 
-        printf("Deseja continuar cadastrando algum produto? [1] Sim | [0]N√£o: ");
+        printf("Deseja continuar cadastrando algum produto? [1] Sim | [0]N„o: ");
         scanf("%d", &continueCad);
 
         (continueCad == 1) ? regToner() : main();
     }
 }
 
-//Listar os pre√ßos cadastrados para cada marca.
+//Listar os preÁos cadastrados para cada marca.
 void listToner()
 {      
-    //Define o idioma padr√£o do sistema.
+    //Define o idioma padr„o do sistema.
     setlocale(LC_ALL, "");
 
     // Abrir o arquivo da respectiva marca escolhida para leitura apenas.
     arquivoLeitura = fopen (marcaNome[*pMenu-1], "r"); 
 
-    //Se o arquivo n√£o existir, ele ser√° criado.
+    //Se o arquivo n„o existir ele ser· criado.
     if(arquivoLeitura == NULL)
     {
         arquivoEscrita = fopen(marcaNome[*pMenu-1], "w");
@@ -167,7 +173,7 @@ void listToner()
         main();        
     }
     
-    //Caso o arquivo j√° exista, a lista de todos os produtos cadastrados ser√£o exibidos na tela.
+    //Caso o arquivo j· exista, a lista de todos os produtos cadastrados ser„o exibidos na tela.
     else
     {
         system("cls");
@@ -175,7 +181,7 @@ void listToner()
         printf("[%s]\n", exibirMarca[*pMenu-1]);
         printf("-----------------------------------------\n");
 
-        //Verifica e continua imprimindo os valores na tela at√© o arquivo chegar ao fim.
+        //Verifica e continua imprimindo os valores na tela atÈ o arquivo chegar ao fim.
         while(!feof(arquivoLeitura))
         {
             resultados = fgets(leituraItens, tamanhoString, arquivoLeitura);
