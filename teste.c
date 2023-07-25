@@ -35,7 +35,6 @@ int main()
         printf("O que deseja fazer? ");
         scanf("%d", &*pMenu);
 
-        if(*pMenu )
         switch (*pMenu)
         {
             case 0:
