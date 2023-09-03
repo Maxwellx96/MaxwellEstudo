@@ -9,16 +9,28 @@
 
 ################################################################# 1 #################################################################
 
-numero1 = int(input("Digite o primeiro número: "))
-numero2 = int(input("Digite o segundo número: "))
-numero3 = int(input("Digite o terceiro número: "))
-numero4 = int(input("Digite o quarto número: "))
-numero5 = int(input("Digite o quinto número: "))
+#numero1 = int(input("Digite o primeiro número: "))
+#numero2 = int(input("Digite o segundo número: "))
+#numero3 = int(input("Digite o terceiro número: "))
+#numero4 = int(input("Digite o quarto número: "))
+#numero5 = int(input("Digite o quinto número: "))
 
-numeros = [numero1, numero2, numero3, numero4, numero5]
+#numeros = [numero1, numero2, numero3, numero4, numero5]
 
-print("Você digitou os números: ", numeros[0], numeros[1], numeros[2], numeros[3], numeros[4])
-print("A ordem inversa dos números é essa: ", numeros[4], numeros[3], numeros[2], numeros[1], numeros[0])
+#print("Você digitou os números: ", numeros[0], numeros[1], numeros[2], numeros[3], numeros[4])
+#print("A ordem inversa dos números é essa: ", numeros[4], numeros[3], numeros[2], numeros[1], numeros[0])
 ################################################################# 2 #################################################################
 
+#largura = float(input("Digite a largura da sala em Metro: "))
+#comprimento = float(input("DIgite o comprimento da sala em Metro: "))
+#aresta_ceramica = float(input("Digite o tamanho da aresta da cerâmica em CM: "))
+#preco_metro_quadrado = float(input("Digite o preço do metro quadrado da cerâmica: "))
 ################################################################# 3 #################################################################
+
+dolar_dia = float(input("Digite a cotação do dólar atual: "))
+converter = float(input("Digite a quantidade de Reais que deseja converter para dólar: "))
+
+resultado = converter / dolar_dia
+
+print("O valor convertido em dólar fica: ", resultado)
+print(f"O valor convertido em dólar fica: %.2f", resultado)
