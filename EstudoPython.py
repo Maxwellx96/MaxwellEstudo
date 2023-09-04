@@ -27,10 +27,10 @@
 #preco_metro_quadrado = float(input("Digite o preço do metro quadrado da cerâmica: "))
 ################################################################# 3 #################################################################
 
-dolar_dia = float(input("Digite a cotação do dólar atual: "))
-converter = float(input("Digite a quantidade de Reais que deseja converter para dólar: "))
+#dolar_dia = float(input("Digite a cotação do dólar atual: "))
+#converter = float(input("Digite a quantidade de Reais que deseja converter para dólar: "))
 
-resultado = converter / dolar_dia
+#resultado = converter / dolar_dia
 
-print("O valor convertido em dólar fica: ", resultado)
-print(f"O valor convertido em dólar fica: %.2f", resultado)
+#print("O valor convertido em dólar fica: ", resultado)
+#print(f"O valor convertido em dólar fica: {resultado:.2f}")
