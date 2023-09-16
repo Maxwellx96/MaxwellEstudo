@@ -9,5 +9,42 @@
 # soma dos quadrados dos catetos”).
 
 ################################################################# 1 #################################################################
+numero1 = int(input("Digite o primeiro número: "))
+numero2 = int(input("Digite o segundo número: "))
+numero3 = int(input("Digite o terceiro número: "))
+
+resultado_mediana = [0, 0, 0]
+resultado_media = (numero1 + numero2 + numero3) / 3
+
+if numero1 < numero2 and numero1 < numero3:
+    resultado_mediana[0] = numero1
+
+elif numero1 > numero2 and numero1 < numero3:
+    resultado_mediana[1] = numero1
+    
+elif numero1 > numero2 and numero1 > numero3:
+    resultado_mediana[2] = numero1
+
+if numero2 < numero3 and numero2 > numero1:
+    resultado_mediana[1] = numero2
+    
+elif numero2 < numero3 and numero2 < numero1:
+    resultado_mediana[0] = numero2
+    
+elif numero2 > numero3 and numero2 > numero1:
+    resultado_mediana[2] = numero2
+
+
+if numero3 > numero2 and numero3 > numero1:
+    resultado_mediana[2] = numero3
+    
+elif numero3 > numero2 and numero3 < numero1:
+    resultado_mediana[0] = numero3
+    
+elif numero3 < numero2 and numero3 < numero1:
+    resultado_mediana[1] = numero3
+
+print(f"A média dos números é: {resultado_media}")
+print(f"A mediana dos números é: [{resultado_mediana[0]}, {resultado_mediana[1]}, {resultado_mediana[2]}] = {resultado_mediana[1]}")
 
 ################################################################# 2 #################################################################
